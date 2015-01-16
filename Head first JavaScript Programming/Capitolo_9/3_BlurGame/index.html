@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Blur Game</title>
+<style>
+body{
+	margin:20px;
+}
+img{
+	margin:20px;
+}
+</style>
+<script>
+function init(){
+	var images=document.getElementsByTagName("img"); //qui uso getElementsByTagName
+	for(var i=0;i<images.length;i++){
+		console.log(images[i]);
+		images[i].onclick=showAnswer; //assegno la funzione showAnswer() al sensore
+	}
+}
+window.onload=init;
+function showAnswer(eventObj){
+	var image=eventObj.target;
+	console.log(image.id);
+	var index=image.src.indexOf("blur");
+	if(index>=0){
+		image.src=image.src.substring(0,index)+".jpg"; //in questo caso mi svincolo dal nome dell'id
+	}else{
+		//clicco un'immagine nitida e la sfuoco
+		image.src=image.src.substring(0,image.src.indexOf(".jpg"))+"blur.jpg";
+	}
+}
+</script>
+</head>
+<body>
+<img id="zero" src="zeroblur.jpg">
+<img id="one" src="oneblur.jpg">
+<img id="two" src="twoblur.jpg">
+<img id="three" src="threeblur.jpg">
+<img id="four" src="fourblur.jpg">
+<img id="five" src="fiveblur.jpg">
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>Check Flight</title>
+</head>
+<body>
+<script>
+function checkNoFlyList(passenger){
+	if(passenger.name!=="Dr. Evel"){
+		return true;
+	}
+	return false;
+}
+function checkNotPaid(passenger){
+	if(passenger.paid===false){
+		return true;
+	}
+	return false;
+}
+function processPassengers(passengers, testFunction){
+	for(var i=0;i<passengers.length;i++){
+		if(testFunction(passengers[i])){
+			return false; // non si decolla perché c'è qualche problema
+		}
+	}
+	return true; // tutto ok. Si può decollare.
+}
+function printPassenger(passenger){
+	console.log("Name: "+passenger.name);
+	if(!passenger.paid){
+		console.log("The passenger "+passenger.name+" has not paid yet.");
+		return true;
+	}
+	console.log("The passenger "+passenger.name+" has paid");
+	return false;
+}
+function createDrinkOrder(passenger) {
+	if (passenger.ticket = = = "firstclass") {
+		alert("Would you like a cocktail or wine?");
+	} else {
+		alert("Your choice is cola or water.");
+	}	
+}
+var passengers=[
+{name:"Jane Doloop", paid:true, ticket: "coach"},
+{name:"Dr. Evel", paid:true, ticket: "firstclass"},
+{name: "Sue Property", paid:false, ticket: "firstclass"},
+{name: "John Funcall", paid:true, ticket: "coach"}
+];
+var isAllOk=processPassengers(passengers, checkNoFlyList);
+var allPaid=processPassengers(passengers, checkNotPaid);
+var printAll=processPassengers(passengers, printPassenger);
+/*
+if(!isAllOk)
+	alert("Flight canceled. Problem with the No-Fly list.");
+if(!allPaid)
+	alert("Flight suspsended. Not everyone has paid");
+*/
+</script>
+</body>
+</html>

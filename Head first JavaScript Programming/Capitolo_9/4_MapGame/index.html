@@ -1,0 +1,50 @@
+<doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Treasure map game</title>
+<script>
+function init(){
+	console.log("Page Loaded");
+	var map=document.getElementById("map");
+	map.onmousemove=showCoords; //il nome della funzione va senza le ""
+	//setTimeout(timeHandler, 5000);
+	setInterval(ticker, 1000);
+}
+var tick=true;
+function ticker(){
+	//var tick=true; SE LA METTO QUI è sempre vera e scrive sempre "Tick". Va messa come variabile globale
+	if(tick){
+		tick=false;
+		console.log("Tick");
+	}else{
+		tick=true;
+		console.log("Tock");
+	}
+}
+function timeHandler(){
+	alert("Do something");
+}
+function showCoords(eventObj){
+	var coords=document.getElementById("coords");
+	var x=eventObj.pageX;
+	var y=eventObj.pageY;
+	console.log(x+", "+y);
+	coords.innerHTML="Map coordinates: "+x+", "+y;
+}
+window.onload=init;
+</script>
+<style>
+img{
+	margin:20px;
+}
+p{
+	margin:20px;
+}
+</style>
+</head>
+<body>
+<img id="map" src="map.jpg">
+<p id="coords">Move mouse to find coordinates...</p>
+</body>
+</html>

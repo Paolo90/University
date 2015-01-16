@@ -1,0 +1,18 @@
+<!doctype html>
+<html>
+<head>
+<title>Prova espressioni funzionali</title>
+</head>
+<body>
+<p id="testo"></p> <!--se lo posizionavo dopo la funzione, testo era null -->
+<script>
+var fly = function(num){
+	var testo=document.getElementById("testo");
+	for(var i = 0; i < num; i++){
+		testo.innerHTML=testo.innerHTML+"Flying ";
+	}
+};
+fly(3);
+</script>
+</body>
+</html>
