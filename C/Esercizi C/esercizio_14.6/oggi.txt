@@ -1,0 +1,5 @@
+160
+E 8.20 vendita_libro U 5.70 pranzo
+300 E 4.00 vendita_bibbia U 1.00 bibita
+301 E 0.00 nulla U 50.00 abbonamento_internet
+302 E 0.00 nulla U 7.00 pranzo

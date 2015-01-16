@@ -1,0 +1,6 @@
+1 milan
+2 juventus
+4 perugia
+3 napoli
+6 parma
+5 ancona

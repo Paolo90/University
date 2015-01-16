@@ -1,0 +1,25 @@
+Specificare un'operazione
+1- Aggiungi nuova voce in rubrica
+2- Ricerca esatta per nome
+3- Ricerca esatta per numero
+4- Stampa l'intera rubrica
+0- Esci dal programma
+Inserisci il nome
+Inserisci il numero telefonico
+paolo
+ 123456
+Aggiungere un'altro numero?
+Specificare un'operazione
+1- Aggiungi nuova voce in rubrica
+2- Ricerca esatta per nome
+3- Ricerca esatta per numero
+4- Stampa l'intera rubrica
+0- Esci dal programma
+paolo 123456
+Specificare un'operazione
+1- Aggiungi nuova voce in rubrica
+2- Ricerca esatta per nome
+3- Ricerca esatta per numero
+4- Stampa l'intera rubrica
+0- Esci dal programma
+Sto uscendo dal programma

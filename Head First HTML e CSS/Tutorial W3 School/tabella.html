@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="it-IT">
+<head>
+	<title>My Web page </title>
+	<meta charset="UTF-8">
+	<style>
+		table, th, td{
+			border:1px solid black;
+			border-collapse:collapse;
+		}
+		td, th{
+			padding:15px;
+			margin:20px;
+		}
+		a:link{
+			color:green;
+			text-decoration:underline;
+		}
+		a:visited{
+			color:orange;
+			text-decoration:underline;
+		}
+		a:hover{
+			background-color:red;
+			color:yellow;
+			text-decoration:none;
+		}
+		a:active{
+			color:violet;
+			text-decoration:underline;
+		}
+	</style>
+	<script>
+		function clearForm(){
+			document.getElementById("ciao").value="";
+		}
+		function resetForm(){
+			document.getElementById("ciao").value="Intoccabile";
+			document.getElementById("ciao").disabled="disabled";
+		}
+	</script>
+</head>
+
+<body>
+	<table>
+		<th>Name</th>
+		<th colspan="2">Contacts</th>
+		<tr>
+			<td>Paolo Piersanti</td>
+			<td><a href="utile.html#useful" target="_blank">paolopiers@gmail.com</a></td>
+			<td>0039 389 527 0966</td>
+		</tr>
+	</table>
+<br>
+<br>
+Aggiungiamo dei form. I form sono molto belli.
+<br>
+	<form action="" id="primoForm">
+		<input id="ciao" type="text" name="TextField" value="Insert value here" maxlength="10" onclick="clearForm()" onblur="resetForm()"> Prova_1
+		<br><br><br>
+		<fieldset>
+		<legend>Options</legend>
+		<input type="checkbox" name="Check1" value="A" checked> Opzione a <br>
+		<input type="checkbox" name="Check2" value="B" > Opzione b <br>
+		<input type="checkbox" name="Check3" value="C" > Opzione c <br>
+		</fieldset>
+		<br>
+		<input type="radio" name="radioB" value="no"> No
+		<br><br>
+		<textarea rows="10" cols="30" name="textarea">The cat is playing in the garden</textarea>
+		<input type="color" value="#ff0000">
+		<input type="range" value="5" min="0" max="20" step="1">
+	</form>
+	<hr>
+	<p style="text-align:center">
+	<img src="http://wallpaperart.altervista.org/Immagini/immagini_gattino_1280x800.jpg" width="300px"><br>
+	<cite>Un bel gattino</cite>
+	</p>
+</body>
+</html>

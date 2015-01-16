@@ -1,0 +1,4 @@
+mazzarri 50000
+allegri 25000
+piersanti 10
+salvatori -25

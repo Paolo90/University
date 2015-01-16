@@ -1,0 +1,23 @@
+TIC TAC TOE:
+
+1.creare una matrice da 9 celle tutte vuote
+2. Creare una variabile che dia scelta al giocatore su chi vuole essere se 1 o 0
+3. dopo la scelta usare una variabile che indichi chi inizia per primo se l'utente o l'npc
+ 3.1 (FACOLTATIVO) scegliere difficoltà tra facile normale e difficile
+4. dare il turno SOLO a chi tocchi e di conseguenza bloccare l'utente se non è il proprio turno
+5. dopo il suo turno, dare la possibilità al npc 
+6. dopo il pc dare la possibilità magari con un messaggio sotto all'utente di farlo
+7.ogni volta controllare se l'utente o npc vincono e quindi se ci fosse un tris enunciarlo dandoti del perdente se fosse npc altrimenti del vincente se è l'utente bloccando la possibilità di poter mettere altre croci
+8. dare possibilità di punteggio
+9. dare la facoltà di poter ricominciare
+10. Fare in modo che ci sia un pareggio se nessuno fà tris	
+
+
+ 
+
+difficoltà normale:
+-modalità casuale tra 1 e 9 e controllare dove è stato gia inserito il valore
+
+difficoltà difficile:
+- dare random casi specifici a seconda di dove l'utente ha messo il proprio segno
+
