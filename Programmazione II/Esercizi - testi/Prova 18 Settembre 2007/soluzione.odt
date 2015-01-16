@@ -1,0 +1,200 @@
+﻿Solzuione Esercizio 1
+
+import java.util.*;
+
+ abstract class Attore{
+    
+    String nome;
+    double eta;
+    public Attore(String nome,double eta){
+        this.nome=nome;
+        this.eta=eta;
+   }
+    public abstract double gradimento();
+    
+}
+
+ class Comico extends Attore{
+    int filmfatti;
+    
+    
+    public Comico(String n,double age,int filmfatti){
+        super(n,age);
+        this.filmfatti=filmfatti;
+    }
+ public double gradimento(){
+     
+     return (filmfatti*0.75);
+ }   
+    
+}
+
+
+class Drammatico extends Attore{
+    double premi;
+    
+    public Drammatico(String s,double et,double premi){
+        super(s,et);
+        this.premi=premi;
+    }
+  public double gradimento(){
+      return(premi*1.25);
+  }  
+    
+}
+
+ class Archivio{
+    Attore V[];
+    int n;
+    public Archivio(){
+        V=new Attore[n];
+        int c=(int)n/3;
+        for(int i=0;i<c;i++){
+            V[i]=new Comico("Comico n"+i,Math.random()*50,(int)(Math.random()*50));
+        }
+        for(int i=c;i<n;i++){
+            V[i]=new Drammatico("Drammatico n"+i,Math.random()*50,Math.random()*50);
+        }
+       }
+    int numAttori(int par){
+        int p=par;
+        int conta=0;
+        for(int i=0;i<V.length;i++){
+            if (V[i].gradimento()>p)
+                conta+=1;
+        }
+        return conta;
+        
+    }
+
+    public static void main(String[] args) {
+        Archivio arch = new Archivio(10);
+        System.out.println("---"+ arch.numAttori(5));
+    }
+
+ }   
+Soluzione Esercizio 2
+
+package esercizio2;
+import java.io.*;
+import java.util.*;
+
+class Elemento {
+    int valore;
+    Elemento successivo = null;
+}
+public class Lista{
+    private Elemento testa;
+    
+    public Lista(int n) {
+        for (int i = 0; i < n; i++){
+            Elemento nuovo = new Elemento();
+            nuovo.valore = (int)(Math.random()*100);
+            nuovo.successivo = testa;
+            testa = nuovo;
+        }
+    }
+
+    public void scriviFile(String nome) {
+        PrintWriter output = null;
+        Elemento temp;
+        double somma = 0;
+        try {
+            if (testa!=null) {
+                output = new PrintWriter(new BufferedWriter(new FileWriter(nome)));
+                for (temp=testa; temp!=null; temp = temp.getProssimo()) {
+                    output.println(temp.getValore());
+                    somma += temp.getValore();
+                }
+                output.println("-------");
+                output.println("MEDIA = "+(somma/lunghezza));
+                
+            }
+        }
+        catch (Exception ex) {
+           System.err.println("Errore nella generazion del file"); 
+        }
+        finally {
+            output.close();            
+        }
+    }
+
+
+ 
+ public static void main(String[] args){
+  
+  Lista L=new Lista(10);
+  L.scriviFile("Ciao.txt"); 
+ 
+ }
+
+
+}
+Soluzione esercizio 3
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+public class ConfString extends Frame{
+    int n=0;
+    Ascoltatore asc = new Ascoltatore();
+    TextField txts;
+    TextField txtd;
+    public static void main (String argv[]){
+        ConfString ist = new ConfString();
+    }
+    ConfString(){
+        setLayout(null);
+        setBounds (30, 10, 300, 200);
+        setTitle("Confronto Stringhe");
+        addWindowListener(asc);
+        txts = new TextField();
+        txts.setBounds(50, 50, 50, 20);
+        txtd = new TextField();
+        txtd.setBounds(200, 50, 50, 20);
+        Button bottone = new Button("Confronta");
+        bottone.setBounds (105, 150, 80, 30);
+        bottone.addActionListener(new ActionListener() {
+           public void actionPerformed(ActionEvent e) {
+               String s1,s2;
+               s1 = txts.getText();
+               s2 = txtd.getText();
+               n = s1.compareTo(s2);
+               repaint();
+           }
+        });
+        add(bottone);
+        add(txts);
+        add(txtd);
+        setVisible(true);
+                
+    }
+    public void paint (Graphics g){
+        if (n==0){
+            g.setColor(Color.YELLOW);
+            g.fillRect(100,80,100,50);
+        }
+        if (n > 0){
+            g.setColor(Color.GREEN);
+            g.fillRect(100,80,100,50);
+        }
+        if (n < 0){
+            g.setColor(Color.RED);
+            g.fillRect(100,80,100,50);
+        }
+    }
+}
+
+class Ascoltatore extends WindowAdapter{
+    public void windowClosed(WindowEvent evt){
+        System.out.println(evt);
+        System.exit(0);
+    }
+    public void windowClosing(WindowEvent evt){
+        evt.getWindow().dispose();
+        System.out.println(evt);
+    }
+    
+}
+

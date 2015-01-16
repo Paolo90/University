@@ -1,0 +1,10 @@
+Osserviamo che quando si opera un typecasting su oggetti per applicare il polimorfismo sui dati, dobbiamo assicurarci, oltre che la classe a cui è 
+dichiarata l'appartenza dell'oggetto sia sovraclasse della classe indicata nel typecasting, che la classe indicata nel typecasting sia legata con un 
+vincolo di ereditarietà alla classe del costruttore e che si trovi in un punto della gerarchia più alto rispetto ad essa.
+
+Per quanto riguarda il polimorfismo sui metodi, tale ragionamento in generale non vale poiché, dato che i metodi possono essere ridefiniti nelle 
+sotoclassi, otterrei un errore di typecasting scorretto. L'unico caso in cui questa strategia funziona è quando il metodo coinvolto sia di tipo final
+in quanto, per definizione, non può essere ridefinito nelle sottoclassi e quindi non si crea il problema di effettuare la decisione perché la struttura
+del metodo rimane immutata nelle sottoclassi. Dunque, se indico al compilatore di attivare un metodo final di una classe legata con un vincolo di 
+ereditarietà alla classe del costruttore ove la classe del costruttore si trova, rispetto ad essa, in un punto più basso della gerarchia non ottengo
+errori di typecasting scorretto come nel caso generale.

@@ -1,0 +1,212 @@
+﻿Soluzione esercizio 1
+
+import java.lang.Math;
+
+abstract class Animale {
+    protected String nome;
+    protected double peso;
+    
+    public Animale(String nome,double peso) {
+        this.nome=nome;
+        this.peso=peso;
+    }
+    
+    public abstract double getCosto();
+}
+
+class Felino extends Animale {
+    private int coefficente;
+    public Felino(String nome,double peso,int coefficente) {
+        super(nome,peso);
+        this.coefficente=coefficente;
+    }
+    
+    public double getCosto() {
+        return (this.peso*this.coefficente);
+    }
+}
+
+class Pachiderma extends Animale {
+    private double coefficente;
+    public Pachiderma(String nome,double peso,int coefficente) {
+        super(nome,peso);
+        this.coefficente=coefficente;
+    }
+    
+    public double getCosto() {
+        return (this.peso*this.coefficente);
+    }
+}
+
+public class Oasi {
+    private Animale[] v;
+    public Oasi(int n) {
+        this.v=new Animale[n];
+        for (int i=0;i<n;i++) {
+            if (i%2==0) {
+                this.v[i]=new Felino("Gatto numero "+(i+1),50*Math.random(),(int)(200*Math.random()));
+            }else{
+                this.v[i]=new Pachiderma("Pachiderma numero "+(i+1),50*Math.random(),(int)(200*Math.random()));
+            }
+        }
+    }
+    
+    public String getHigherCost() {
+        String name="";
+        double maxCost=0;
+        double temp=0;
+        for (int i=0;i<this.v.length;i++) {
+            temp=this.v[i].getCosto();
+            System.out.println(this.v[i].nome+","+"costa esattamente "+temp+" a");
+
+            if (temp>maxCost) {
+                maxCost=temp;
+                name=this.v[i].nome;
+            }
+        }
+        return name;
+    }
+    
+    public static void main (String[] args) {
+        Oasi c=new Oasi(5);
+        System.out.println("---");
+        System.out.println("Il costo piu' alto: "+c.getHigherCost());
+    }
+}
+Soluzione Esercizio 2 (Client)
+
+/*
+ * Somma.java
+ *
+ * Created on 3 settembre 2007, 11.26
+ *
+ * To change this template, choose Tools | Template Manager
+ * and open the template in the editor.
+ */
+
+/**
+ *
+ * @author local
+ */
+import java.io.*;
+import java.net.*;
+
+public class Somma {
+    
+   private static int num_porta = 8100;
+   
+   public static void main(String args[]){
+       Socket socket = null;
+       BufferedReader input = null;
+       String Address;
+       
+     if (args.length != 1) {
+         Address="localhost";
+     }
+     else
+         Address = args[0];
+
+       try {
+           socket = new Socket(Address,num_porta);
+           input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+       } catch (IOException e) {
+           System.err.println("Connessione non riuscita");}
+       
+       try {
+           String in_num;
+           int Somma=0;
+           boolean finito = false;
+           while (! finito){
+               in_num = input.readLine();
+               if (in_num.trim().equals("BYE")){
+                   finito = true;
+               }else Somma += Integer.parseInt(in_num);
+           }
+           System.out.println("La somma totale dei dati ricevuti dal server �: "+Somma);
+           } catch (IOException e) {
+                System.err.println("Errore di comunicazione");}
+            finally {  
+                try {
+                input.close();
+                socket.close();
+                  } catch (IOException e) {
+                System.err.println("Errore chiusura");}
+       }
+   }
+}
+Soluzione esercizio 2 (Server)
+
+/*
+ * Networking.java
+ *
+ * Created on 3 settembre 2007, 10.50
+ *
+ * To change this template, choose Tools | Template Manager
+ * and open the template in the editor.
+ */
+
+/**
+ *
+ * @author local
+ */
+import java.net.*;
+import java.util.*;
+import java.io.*;
+import java.lang.*;
+
+//SERVER
+
+public class Networking {
+    
+    /** Creates a new instance of Networking */
+    public Networking() {
+    }
+    
+    public static void main(String args[]){
+        ServerSocket server;
+        try {
+            server = new ServerSocket(8100); //parametro:numero della porta 
+            while (true){
+                Socket incoming = server.accept();
+                ThreadServer t = new ThreadServer(incoming,"numeri.txt");
+                t.start();
+            }
+        } catch (IOException e) {
+        }
+    }
+    
+}
+
+class ThreadServer extends Thread{
+    private Socket incoming;
+    private String nome_file;
+    
+    public ThreadServer(Socket s, String nome){
+        incoming = s;
+        nome_file = nome;
+    }
+    
+    public void run(){
+
+        BufferedReader input;
+        PrintWriter output;
+        BufferedReader infile = null;
+
+        String num;
+        
+        try {
+            input = new BufferedReader(new InputStreamReader(incoming.getInputStream()));
+            output = new PrintWriter(incoming.getOutputStream(),true);
+            infile = new BufferedReader(new FileReader(nome_file));
+            while ((num = (infile.readLine())) != null){ 
+                output.println(num);   
+            }
+            output.println("BYE");
+  
+        } catch (Exception e) {}
+        try {
+            incoming.close();
+        } catch (Exception e) {}
+    }
+    
+}

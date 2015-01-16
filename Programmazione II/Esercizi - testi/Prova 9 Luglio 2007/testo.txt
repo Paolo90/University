@@ -1,0 +1,45 @@
+Esercizio 1 (15 punti)
+
+Si definisca una gerarchia di classi per rappresentare i clienti di una agenzia di viaggi:
+
+si definisca la classe Cliente che contiene:
+* il campo nome (di classe String)
+* il campo permanenza (un intero)
+* il metodo costruttore (che ha nome e permanenza come parametri) 
+
+si definisca la classe Marittimo sottoclasse di Cliente che contiene:
+* il campo coefficiente (un intero),
+* il metodo costruttore (che ha nome, permanenza e coefficiente come parametri) 
+* un metodo che restituisce il costo del soggiorno (permanenza moltiplicata per coefficiente).
+
+si definisca la classe Montanaro sottoclasse di Cliente che contiene:
+* il campo coefficiente (un double),
+* il metodo costruttore (che ha nome, permanenza e coefficiente come parametri) 
+* un metodo che restituisce il costo del soggiorno (permanenza moltiplicata per coefficiente).
+
+Si definisca una classe Archivio che contiene come campo un array V in cui � possibile inserire clienti sia di classe Marittimo che Montanaro. 
+Si definisca inoltre un costruttore della classe Archivio che ha due parametri interi m e n e che instanzia il vettore V con m+n elementi  inserendo m Marittimi ed n Montanari. Si definiscano i campi degli oggetti in modo casuale.
+Si definisca infine un metodo della classe Archivio che, dato il nome di un cliente,  restituisce il costo del cliente se questi � presente nel vettore V, il valore -1 altrimenti.
+Per questo metodo si supponga che i nomi dei clienti siano tutti diversi.
+
+Se necessario si modifichi la gerarchia di classi definita sopra.
+
+
+Esercizio 2 (10 punti)
+
+Si definisca una applicazione client server basata su socket. Il server, utilizzando i thread, deve poter rispondere contemporaneamente a piu' client.
+
+Il server ha un campo n, il cui valore viene assegnato nel costruttore.
+Il server manda ai client i valori da 1 a n. 
+Il server segnala il termine della trasmissione dei valori mandando il messagio "BYE".
+
+Il client deve restituire la media dei valori mandati dal server.
+
+
+Esercizio 3 (5 punti)
+
+Si definisca una applicazione grafica costituita da una finestra che contiene (in questo ordine):
+due campi di testo  e un bottone
+
+cliccando sul bottone deve avvenire:
+	se uno dei due campi di testo è vuoto il loro contenuto viene scambiato

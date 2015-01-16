@@ -1,0 +1,309 @@
+Soluzione esercizio 1
+
+/*
+ * Archivio.java
+ *
+ * Created on 9 luglio 2007, 10.29
+ *
+ * To change this template, choose Tools | Options and locate the template under
+ * the Source Creation and Management node. Right-click the template and choose
+ * Open. You can then make changes to the template in the Source Editor.
+ */
+
+
+
+
+
+
+abstract class Cliente {
+    String nome;
+    int permanenza;
+    
+    /** Creates a new instance of Cliente */
+     Cliente(String a,int b) {
+        nome = a;
+        permanenza = b;
+    }
+    
+     abstract double soggiorno();
+    
+     abstract String getName();
+    
+    
+}
+
+
+
+ class Marittimo extends Cliente {
+    int coefficiente;
+    
+    /** Creates a new instance of Marittimo */
+     Marittimo(String nom, int p, int coef ) {
+        super(nom, p);
+        coefficiente = coef;
+    }
+    
+     String getName(){
+        return nome;
+    }
+    
+     double soggiorno(){
+        return permanenza*coefficiente;
+    }
+    
+}
+
+
+ class Montanaro extends Cliente{
+    double coefficiente;
+    
+     Montanaro(String nom,int p, double coef){
+        super(nom, p);
+        coefficiente = coef;
+    }
+     String getName(){
+        return nome;
+    }
+     double soggiorno(){
+        return permanenza*coefficiente;
+    }
+    
+}
+
+
+
+
+ public class Archivio {
+    Cliente [] v;
+    
+    /** Creates a new instance of Archivio */
+    public Archivio(int m, int n) {
+        v= new Cliente[m+n];
+        for (int i = 0 ; i < m;i++){
+            v[i]=new Marittimo("Marittimo"+i,(int)(Math.random()*214),(int)(Math.random()*10));
+        }
+        for (int i = m ; i < n+m ;i++){
+            v[i]=new Montanaro("Montanaro"+(i-m),(int)(Math.random()*214),(double)(Math.random()*10));
+        }
+    }
+    
+    public double costo(String nm){
+        String nome = nm;
+        double costo = 0;
+        for(int i = 0; i < v.length; i++){
+            if( nome.equals(v[i].getName())){
+                costo = v[i].soggiorno();
+                return costo;
+            }
+        }
+        return -1;
+    }
+       
+   public static void main(String [] args){
+        Archivio a = new Archivio(6,6);
+        System.out.println(a.costo("Marittimo2"));
+    }
+
+    
+}
+
+Soluzione esercizio 2 Client
+
+import java.util.*;
+import java.io.*;
+import java.net.*;
+public class ClientT{
+    private static final int PORTNUM=7777;
+    public static void main(String args[]){
+        Socket socket=null;
+        String Address;
+        BufferedReader input=null;
+        
+        if (args.length!=1) {
+            Address= "localhost";
+        } else Address= args[0];
+        try{
+            socket=new Socket(Address, PORTNUM);
+            input=new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        } catch(IOException e) {
+            e.printStackTrace();
+            System.exit(-1);}
+        try{
+            String  in;
+            double somma=0;
+            int quanti = 0;
+            boolean i=false;
+            while(!i) {
+                in=input.readLine();
+                if (in.trim().equals("BYE"))
+                    i=true;
+                else {
+                    somma+=Integer.parseInt(in);
+                    quanti++;
+                }
+            }
+            if (quanti>0)
+                System.out.println("la media � "+somma/quanti);
+            else
+                System.out.println("Nessun valore ricevuto");                
+            input.close();
+            socket.close();
+        } catch(IOException e){e.printStackTrace();}
+    }
+    
+    
+    
+}
+
+Soluzione esercizio 2 Server
+
+import java.net.*;
+import java.util.*;
+import java.io.*;
+
+public class ServerT {
+    
+    /** Creates a new instance of ServerT */
+    public static void main(String args[]) 
+    {ServerSocket server;
+     try{
+     server=new ServerSocket(7777);
+     while(true){
+     Socket incoming=server.accept();
+     ThreadServer a=new ThreadServer(incoming);
+     a.start();
+     }
+     
+     }
+    catch(IOException e){e.printStackTrace();
+     }
+    }
+}
+
+
+class ThreadServer extends Thread{
+private Socket incoming;
+
+
+    public ThreadServer(Socket s) {
+        incoming=s;
+        
+    }
+    
+    public void run()
+    {
+    BufferedReader input;
+    PrintWriter output;
+
+    int n=0;
+    int numero=0;
+    try{
+    input=new BufferedReader (new InputStreamReader(incoming.getInputStream()));
+    output=new PrintWriter(incoming.getOutputStream(),true);
+         n=(int)(1000*Math.random());
+         for(int i=1; i<n; i++){
+              numero=i;
+              output.println(numero);
+              System.out.println(numero);
+              }
+      output.println("BYE");
+    
+    
+    }
+    catch(IOException e)  
+    {e.printStackTrace();}
+    finally{
+            try{incoming.close();}
+            catch (IOException e){e.printStackTrace();}
+            
+    }
+    
+    }
+    
+    }
+
+Soluzione esercizio 3
+
+/*
+ * AppScambiaTesto.java
+ *
+ * Created on 9 luglio 2007, 12.14
+ *
+ * To change this template, choose Tools | Options and locate the template under
+ * the Source Creation and Management node. Right-click the template and choose
+ * Open. You can then make changes to the template in the Source Editor.
+ */
+
+package Ex3;
+import java.awt.*;
+import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.WindowListener;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+/**
+ *
+ * @author local
+ */
+public class AppScambiaTesto extends JFrame implements ActionListener, WindowListener {
+    TextField u,d;
+    Button b;
+    
+    /** Creates a new instance of AppScambiaTesto */
+    public AppScambiaTesto() {
+        b= new Button("Scambia Testo");
+        b.addActionListener(this);
+        setLayout(new GridLayout(3,1));
+        u = new TextField();
+        d = new TextField();
+        setSize(400,150);
+        add(u,BorderLayout.NORTH);
+        add(d,BorderLayout.CENTER);
+        add(b,BorderLayout.SOUTH);
+        setVisible(true);
+        addWindowListener(this);
+    }
+    public void windowOpened( WindowEvent e ){
+        
+    }
+    public void windowClosing( WindowEvent e ){
+        dispose();
+    }
+    public void windowClosed( WindowEvent e ){
+        
+    }
+    public void windowIconified( WindowEvent e ){
+        
+    }
+    public void windowDeiconified( WindowEvent e ){
+        
+    }
+    public void windowActivated( WindowEvent e ){
+        
+    }
+    public void windowDeactivated( WindowEvent e ){
+        
+    }
+    public void actionPerformed(ActionEvent e){
+        Object performer = e.getSource();
+        System.out.println(e.getSource());
+        if (performer.equals(b)){
+             if(u.getText().equals("")){
+                 System.out.println("UPTEXT");
+                u.setText(d.getText());
+                d.setText("");
+                
+            }
+             else if(d.getText().equals("")){
+                d.setText(u.getText());
+                u.setText("");
+            }
+        }
+    }
+    
+    public static void main(String [] args){
+        AppScambiaTesto a = new AppScambiaTesto();
+    }
+}
+
+

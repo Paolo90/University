@@ -1,0 +1,39 @@
+Esercizio 1 (10 punti)
+
+Si definisca una gerarchia di classi per rappresentare delle figura geometriche:
+
+si definisca la classe Figura che contierne il campo colore (di classe Color)
+
+
+si definisca la classe Quadrato sottoclasse di Figura che contiene il campo lato (un double) e 
+un metodo che restituisce l'area del quadrato.
+
+si definisca la classe Cerchio sottoclasse di Figura che contiene il campo raggio (un double) e 
+un metodo che restituisce l'area del cerchio.
+
+
+Si definisca una classe Mosaico che contiene come campo un array V in cui è possibile inserire sia cerchi che quadrati. Si definisca inoltre un
+costruttore della classe array che ha un parametro intero n e che instanzia il vettore V con 2n elementi inserendo n quadrati (di lato casuale) ed n 
+cerchi (di raggio casuale)
+Si definisca infine un metodo della classe Mosaico che restituisce la media delle aree delle figure presenti nel vettore V.
+
+Se necessario si modifichi la gerarchia di classi definita sopra.
+
+
+Esercizio 2 (5 punti)
+
+Si definisca un programma Java che, dato un file di testo che contiene un intero per ogni riga restituisce il valore massimo presente nel file.
+
+
+Esercizio 3 (10 punti)
+
+Si definisca una applicazione client server basata su socket. Il server, utilizzando i thread, deve poter rispondere contemporaneamente a piu' client.
+Il server manda al client un numero casuale di interi casuali. Il server segnala il termine della trasmissione dei valori mandando il messagio "BYE".
+Il client deve restituire la somma dei valori mandati dal server.
+
+
+Esercizio 4 (5 punti)
+
+Si definisca una applicazione grafica costituita da una finestra che contiene un pannello ed un bottone.
+Cliaccando sul bottone il pannello deve colorarsi alternativamente di bianco e di rosso.
+

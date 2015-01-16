@@ -1,0 +1,6 @@
+Definire una classe che rappresenti un numero intero.
+
+Si definisca un meccanismo per contare quanti oggetti della classe sono stati creati.
+
+Definire un metodo che verifica se l'oggetto rappresenta un numero primo.
+Definire un metodo che dati una base ed un esponente calcola la potenza: versione iterativa (algoritmo lineare sull'esponente) 

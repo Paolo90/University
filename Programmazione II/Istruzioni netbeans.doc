@@ -1,0 +1,17 @@
+﻿Per creare un'applicazione java:
+
+1) New Project → Java Application → assegna nome(creare la classe con il main())
+
+Per creare un'applet java:
+
+1) New Project → Java class library → assegnare il nome
+
+2) Nel package creato cliccare col destro e selezionare New → applet (se non c'è nel menù principale cliccare su “Others”).
+
+Per creare un'applicazione grafica:
+
+1) New Project → Java application → assegnare il nome e NON creare la classe con il main();
+
+2) Creare un package con il nome del progetto però tutto minuscolo;
+ 
+3) Nel package creato cliccare col destro e selezionare New → JFrame

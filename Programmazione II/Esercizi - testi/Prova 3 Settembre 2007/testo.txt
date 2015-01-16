@@ -1,0 +1,47 @@
+Esercizio 1 (15 punti)
+
+Si definisca una gerarchia di classi per rappresentare gli animali di un'oasi naturalistica:
+
+si definisca la classe Animale che contiene:
+* il campo nome (di classe String)
+* il campo peso (un double)
+* il metodo costruttore (che ha nome e peso come parametri) 
+
+si definisca la classe Felino sottoclasse di Animale che contiene:
+* il campo coefficiente (un intero),
+* il metodo costruttore (che ha nome, peso e coefficiente come parametri) 
+* un metodo che restituisce il costo per l'alimentazione (peso moltiplicato per coefficiente).
+
+si definisca la classe Pachiderma sottoclasse di Animale che contiene:
+* il campo coefficiente (un double),
+* il metodo costruttore (che ha nome, peso e coefficiente come parametri) 
+* un metodo che restituisce il costo per l'alimentazione (peso moltiplicato per coefficiente).
+
+Si definisca una classe Oasi che contiene come campo un array V in cui è possibile inserire sia felini che pachidermi. 
+Si definisca inoltre un costruttore della classe Oasi che ha un parametro n e che instanzia il vettore V con n elementi  inserendo felini nelle posizioni pari, pachidermi nelle dispari. Si definiscano i campi degli oggetti in modo casuale.
+Si definisca infine un metodo della classe Oasi che restituisce il nome dell'animale presente in V  il cui costo per l'alimentazione è più elevato.
+
+Se necessario si modifichi la gerarchia di classi definita sopra.
+
+Esercizio 2 (10 punti)
+
+Si definisca una applicazione client server basata su socket. Il server, utilizzando i thread, deve poter rispondere contemporaneamente a piu' client.
+
+Il server ha un campo nome (una stringa), il cui valore viene assegnato nel costruttore.
+Il server apre il file che si chiama nome e che supponiamo contenga un intero per ogni riga. 
+Il server invia ai client i valori contenuti nel file. 
+
+Il server segnala il termine della trasmissione dei valori mandando il messagio "BYE".
+Il client deve restituire la somma dei valori mandati dal server.
+
+Esercizio 3 (5 punti)
+
+Si definisca una applicazione grafica costituita da una finestra che contiene (in questo ordine):
+un campo di testo  e un bottone
+
+cliccando sul bottone deve avvenire:
+* viene aperto il file (come file di testo) il cui nome è contenuto nel campo di testo.
+* Si scrive nel file la frase: 
+"Il nome di questo file e' lungo: " seguita dalla lunghezza del nome del file
+ Se il campo di testo è vuoto non avverrà nulla
+	

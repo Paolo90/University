@@ -1,0 +1,88 @@
+run:
+Thread-0 ha ricevuto: 8
+Thread-0 ha inviato: 7
+Thread-0 ha inviato: 1
+java.net.SocketException: Connection reset
+	at java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:118)
+	at java.net.SocketOutputStream.write(SocketOutputStream.java:138)
+	at java.io.DataOutputStream.writeInt(DataOutputStream.java:197)
+	at serveresercizio_2.ThreadServer.run(ThreadServer.java:29)
+Thread-1 ha ricevuto: 9
+Thread-1 ha inviato: 3
+Thread-1 ha inviato: 6
+Thread-1 ha inviato: 6
+Thread-1 ha inviato: 7
+Thread-1 ha inviato: 2
+Thread-1 ha inviato: 3
+Thread-1 ha inviato: 3
+Thread-1 ha inviato: 1
+Thread-1 ha inviato: 2
+Thread-2 ha ricevuto: 8
+Thread-2 ha inviato: 1
+Thread-2 ha inviato: 3
+Thread-2 ha inviato: 8
+Thread-2 ha inviato: 1
+Thread-2 ha inviato: 8
+Thread-2 ha inviato: 9
+Thread-2 ha inviato: 8
+Thread-2 ha inviato: 0
+Thread-3 ha ricevuto: 10
+Thread-3 ha inviato: 7
+Thread-3 ha inviato: 6
+Thread-3 ha inviato: 4
+Thread-3 ha inviato: 2
+Thread-3 ha inviato: 2
+java.net.SocketException: Connection reset
+	at java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:118)
+	at java.net.SocketOutputStream.write(SocketOutputStream.java:138)
+	at java.io.DataOutputStream.writeInt(DataOutputStream.java:197)
+	at serveresercizio_2.ThreadServer.run(ThreadServer.java:29)
+Thread-4 ha ricevuto: 8
+Thread-4 ha inviato: 2
+Thread-4 ha inviato: 5
+Thread-4 ha inviato: 8
+Thread-4 ha inviato: 9
+Thread-4 ha inviato: 9
+java.net.SocketException: Connection reset
+	at java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:118)
+Thread-4 ha inviato: 9
+	at java.net.SocketOutputStream.write(SocketOutputStream.java:138)
+	at java.io.DataOutputStream.writeInt(DataOutputStream.java:197)
+	at serveresercizio_2.ThreadServer.run(ThreadServer.java:29)
+Thread-5 ha ricevuto: 5
+Thread-5 ha inviato: 4
+Thread-5 ha inviato: 3
+Thread-5 ha inviato: 0
+Thread-5 ha inviato: 9
+Thread-5 ha inviato: 1
+java.net.SocketException: Connection reset
+	at java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:118)
+	at java.net.SocketOutputStream.write(SocketOutputStream.java:138)
+	at java.io.DataOutputStream.writeInt(DataOutputStream.java:197)
+	at serveresercizio_2.ThreadServer.run(ThreadServer.java:29)
+Thread-6 ha ricevuto: 6
+Thread-6 ha inviato: 2
+Thread-6 ha inviato: 0
+Thread-6 ha inviato: 4
+Thread-6 ha inviato: 5
+Thread-6 ha inviato: 8
+Thread-6 ha inviato: 8
+Thread-7 ha ricevuto: 2
+Thread-7 ha inviato: 7
+Thread-7 ha inviato: 9
+Thread-8 ha ricevuto: 5
+Thread-8 ha inviato: 8
+Thread-8 ha inviato: 5
+Thread-8 ha inviato: 6
+Thread-8 ha inviato: 0
+Thread-8 ha inviato: 4
+Thread-9 ha ricevuto: 2
+Thread-9 ha inviato: 8
+Thread-9 ha inviato: 7
+Thread-10 ha ricevuto: 6
+Thread-10 ha inviato: 0
+Thread-10 ha inviato: 9
+Thread-10 ha inviato: 9
+Thread-10 ha inviato: 5
+Thread-10 ha inviato: 3
+Thread-10 ha inviato: 1

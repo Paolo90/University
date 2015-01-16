@@ -1,0 +1,415 @@
+Esercizio 1 (10 punti)
+
+Si definisca una gerarchia di classi per rappresentare delle figura geometriche:
+
+si definisca la classe Figura che contierne il campo colore (di classe Color)
+
+
+si definisca la classe Quadrato sottoclasse di Figura che contiene il campo lato (un double) e 
+un metodo che restituisce l'area del quadrato.
+
+si definisca la classe Cerchio sottoclasse di Figura che contiene il campo raggio (un double) e 
+un metodo che restituisce l'area del cerchio.
+
+
+Si definisca una classe Mosaico che contiene come campo un array V in cui � possibile inserire sia cerchi che quadrati. Si definisca inoltre un costruttore della classe array che ha un parametro intero n e che instanzia il vettore V con 2n elementi inserendo n quadrati (di lato casuale) ed n cerchi (di raggio casuale)
+Si definisca infine un metodo della classe Mosaico che restituisce la media delle aree delle figure presenti nel vettore V.
+
+Se necessario si modifichi la gerarchia di classi definita sopra.
+
+
+
+SOLUZIONE:
+
+
+import java.awt.*;
+/**
+ * per l'uso che ne farempo nella classe Mosaico serve anche un metodo area
+ * si pu� definirlo in modo che restituisca un vaore convenzionale
+ * o in questo caso si pu� definire il metodo (e quindi la classe) come astratti
+ * 
+ */
+
+abstract public class Figura {
+    
+    Color colore;
+    
+    /** Creates a new instance of Figura */
+    public Figura (Color colore) {
+        this.colore = colore;
+    }
+    
+    public abstract double getArea ();
+            
+}
+
+
+public class Quadrato extends Figura {
+    
+    double lato;
+    
+    /** Qui non definisco il costruttore: questo influenza l modo di uso nella classe Mosaico */
+   
+    
+    public double getArea (){
+        return lato*lato;
+    }
+    
+}
+
+public class Cerchio extends Figura{
+    
+    double raggio;
+    
+    /** Creates a new instance of Cerchio */
+    public Cerchio(Color colore, double raggio) {
+        super (colore);
+        this.raggio = raggio;
+    }
+    
+    public double getArea () {
+        return raggio*raggio*Math.PI;
+    }
+    
+}
+
+ class Mosaico {
+      Figura [] V;
+         
+      Mosaico (int n) {
+          V = new Figura [2*n];
+          for (int i=0; i<n; i++) {
+              V[i]= new Quadrato();
+             ((Quadrato)V[i]).lato = Math.random();
+          }
+          for (int i=n; i<2*n; i++) {
+              V[i]= new Cerchio(Math.random(), Color.WHITE);
+	/** l'uso del costruttore ha semplificato la creazione e l'inserimento dell'oggetto
+	* nel vettore
+	*/
+      }
+      }
+
+      
+      double media () { 
+          double m =0;
+          for (int i =0; i<V.length; i++){
+              m+=V[i].area();   
+          }
+	  if (V.length ==0)
+		return 0;	
+	  else
+	        return m/V.length;
+      }
+      
+  }
+  
+
+
+
+Esercizio 2 (5 punti)
+
+Si definisca un programma Java che, dato un file di testo che contiene un intero per ogni riga restituisce il valore massimo presente nel file.
+
+SOLUZIONE
+
+
+import java.io.*;
+/**
+ *
+ * @author local
+ */
+public class MaxFile {
+    
+
+    /** Creates a new instance of MaxFile */
+    
+    public MaxFile(String nomeFile) {
+    }
+    
+    public static void main (String args[]){
+        
+        BufferedReader inputFile=null;
+        String nomeFile;
+        int max=0;
+        try {
+            if (args.length>0)
+                nomeFile = args[0];
+            else
+                nomeFile = "Numeri.txt";
+/* una alternativa era leggere il nome del file da tastiera */
+
+
+            inputFile = new BufferedReader(new FileReader(nomeFile));
+            max=Integer.parseInt(inputFile.readLine());
+            String letto;
+            while ((letto=inputFile.readLine()) != null){
+                int temp = Integer.parseInt(letto);
+                if (temp>max)
+                    max=temp;
+            }
+        }
+        catch (FileNotFoundException fnfe){System.out.println("Errore: il file immesso non esiste");}
+        catch (IOException ioe){System.out.println("Errore di Input; "+ioe.getMessage());} 
+        finally {
+            if (inputFile!=null)
+                try{
+                    inputFile.close();
+                }
+                catch (IOException ioe){System.out.println("Erreore: il flusso d'ingresso non puo' essere chiuso "+ioe.getMessage());}
+        }
+        System.out.println ("Il massimo tra i numeri contenuti nel file e' "+max);
+    }
+}
+
+
+
+
+
+Esercizio 3 (10 punti)
+
+Si definisca una applicazione client server basata su socket. Il server, utilizzando i thread, deve poter rispondere contemporaneamente a piu' client.
+Il server manda al client un numero casuale di interi casuali. Il server segnala il termine della trasmissione dei valori mandando il messagio "BYE".
+Il client deve restituire la somma dei valoro mandati dal server.
+
+
+
+SOLUZIONE
+
+
+SERVER:
+
+import java.net.*;
+import java.io.*;
+import java.util.*;
+
+public class Networking
+{
+  
+
+
+    public static void main(String arg[])
+    {
+    	ServerSocket server;
+
+
+        try {
+            server=new ServerSocket(8100);
+            while(true) {
+                Socket incoming=server.accept();
+                ThreadServer t =new ThreadServer(incoming);
+                t.start();
+            }
+         }
+         catch(IOException e) {
+             e.printStackTrace();
+         }
+    }
+}
+
+
+
+
+class ThreadServer extends Thread
+{
+
+    private Socket incoming;
+    private BufferedReader input;
+    private PrintWriter output;
+
+    public ThreadServer(Socket s)
+    {
+        
+        incoming=s;
+    }
+
+    public void run()
+    {
+	int num=0;
+        int casuale=0;
+
+        try {
+            input=new BufferedReader(new InputStreamReader(incoming.getInputStream()));
+            output=new PrintWriter(incoming.getOutputStream(),true);
+/* il parametro true garantisce l'autoflush */
+            num=(int)(100*Math.random());        
+            for(int i=0; i < num; i++) {
+                    casuale=(int)(num*Math.random());
+                    output.println(casuale);
+	            System.out.println(casuale);
+                }
+            output.println("BYE");
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        finally {
+        	try {
+            		incoming.close();
+		    }
+	        catch(Exception e){
+	            e.printStackTrace();
+	        }
+
+
+        }
+    }
+}
+             
+
+             
+
+CLIENT:
+
+
+
+import java.io.*;	
+import java.net.*;
+
+public class SommaNumeri {
+private static final int PORTNUM = 8100;
+
+public static void main(String[] args) {
+    Socket socket=null;
+    BufferedReader input=null;
+    String address;
+
+    // Controllo che la linea comandio contenga l'indirizzo a cui connettersi
+    if (args.length != 1) 
+	{
+	System.out.println("Usage: java SommaNumeri <address>");
+         return;
+	}
+    else
+    address = args[0];
+
+    try {
+      socket = new Socket(address, PORTNUM);
+      input=new BufferedReader(new InputStreamReader(socket.getInputStream()));
+
+    }
+    catch (IOException e) 
+        {System.err.println("Errore: non � possibile stabilire la connessione");
+      	System.exit(1);}
+
+
+    try { 
+      String  inStr;
+      int somma = 0;
+      boolean finito = false;
+
+      while (! finito) { 
+	inStr = input.readLine();
+        if (inStr.trim().equals("BYE")) 
+		finito = true;
+	else
+		somma += Integer.parseInt(inStr);
+	}
+        System.out.println("Somma numeri ricevuti dal server: " + somma);
+        input.close();
+        socket.close();
+    }
+    catch (IOException e) 
+{ System.err.println("Errore durante la comunicazione col server");}
+  }
+}
+
+
+
+
+
+
+
+Esercizio 4 (5 punti)
+
+Si definisca una applicazione grafica costituita da una finestra che contiene un pannello ed un bottone.
+Cliaccando sul bottone il pannello deve colorarsi alternativamente di bianco e di rosso.
+
+
+
+SOLUZIONE
+
+import java.awt.*;
+
+/**
+ *
+ * questo programma � stato generato usando NetBeans
+ * ai fini dell'esercizio si consideri inparticolare il metodo:
+ * jButton1ActionPerformed
+ *
+ */
+public class Finestracolorata extends javax.swing.JFrame {
+    
+    boolean alternato = false;
+    
+    /** Creates new form Finestracolorata */
+    public Finestracolorata() {
+        initComponents();
+    }
+    
+    
+    
+    /** This method is called from within the constructor to
+     * initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is
+     * always regenerated by the Form Editor.
+     */
+    // <editor-fold defaultstate="collapsed" desc=" Generated Code ">                          
+    private void initComponents() {
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+
+        getContentPane().setLayout(new java.awt.GridLayout(2, 1, 1, 2));
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().add(jPanel1);
+
+        jPanel2.setLayout(new java.awt.GridLayout(1, 3, 1, 3));
+
+        jButton1.setText("jButton1");
+        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jPanel2.add(jButton1);
+
+        getContentPane().add(jPanel2);
+
+        pack();
+    }
+    // </editor-fold>                        
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+// TODO add your handling code here:
+        if (!alternato) {
+            jPanel1.setBackground(Color.WHITE);
+            alternato = true;
+        }
+        else {
+            jPanel1.setBackground(Color.RED);
+            alternato = false;
+        }
+    }                                        
+    
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Finestracolorata().setVisible(true);
+            }
+        });
+    }
+    
+    // Variables declaration - do not modify                     
+    private javax.swing.JButton jButton1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    // End of variables declaration                   
+    
+}
