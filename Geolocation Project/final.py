@@ -45,7 +45,7 @@ import math
 def distanza(A,B):
 	pig=math.pi/180
 	if A!=B:
-		dis= R*math.acos(math.sin(lat[A]*pig)*math.sin(lat[B]*pig)+math.cos(lat[A]*pig)*math.cos(lat[B]pig)*math.cos((lon[A]-lon[B])*pig))
+		dis= R*math.acos(math.sin(lat[A]*pig)*math.sin(lat[B]*pig)+math.cos(lat[A]*pig)*math.cos(lat[B]*pig)*math.cos((lon[A]-lon[B])*pig))
 	else:
 		dis=0
 	return dis
